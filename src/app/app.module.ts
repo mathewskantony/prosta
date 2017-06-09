@@ -6,13 +6,19 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { MdIconModule, MdListModule, MdButtonModule, MdCheckboxModule} from '@angular/material';
 import {MdCardModule, MdRadioModule, MdSliderModule, MdProgressBarModule
   , MdProgressSpinnerModule, MdToolbarModule } from '@angular/material';
+import {MdMenuModule} from '@angular/material';
 
 
 import { AppComponent } from './app.component';
+import { MenuComponent } from './menu/menu.component';
+import { ToolbarComponent } from './toolbar/toolbar.component';
+import { JobService } from './services/job-service.service';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MenuComponent,
+    ToolbarComponent
   ],
   imports: [
     BrowserModule,
@@ -21,9 +27,10 @@ import { AppComponent } from './app.component';
     BrowserAnimationsModule, MdToolbarModule,
     MdButtonModule, MdCheckboxModule,
     MdIconModule, MdListModule, MdCardModule, MdRadioModule, MdSliderModule,
-    MdProgressBarModule, MdProgressSpinnerModule
+    MdProgressBarModule, MdProgressSpinnerModule,
+    MdMenuModule
   ],
-  providers: [],
+  providers: [JobService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
