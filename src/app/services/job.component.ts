@@ -6,4 +6,6 @@ endTime: string;
 hours: number;
 hRate: number;
 description: string;
+date: string;
+status: string;
 }
