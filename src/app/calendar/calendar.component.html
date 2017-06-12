@@ -1,3 +1,18 @@
-<p>
-  calendar works!
-</p>
+<md-grid-list cols="7">
+  <md-grid-tile
+    *ngFor="let dow of dayOfWeek"
+    colspan="1"
+    rowspan="1"
+    [style.background]="calendar.class.header">
+    {{dow}}
+  </md-grid-tile>
+  <md-grid-tile
+    *ngFor="let day of calendar.days"
+    colspan="1"
+    rowspan="1"
+    [style.background]="day.isSelected ? calendar.class.selected :calendar.class.cell"
+    (click)="selectDate(day)"
+    (dblclick)="deSelect(day)">
+    {{day.dayOfMonth}}
+  </md-grid-tile>
+</md-grid-list>

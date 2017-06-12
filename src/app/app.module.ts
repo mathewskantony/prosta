@@ -5,8 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { MdIconModule, MdListModule, MdButtonModule, MdCheckboxModule} from '@angular/material';
-import {MdCardModule, MdRadioModule, MdSliderModule, MdProgressBarModule
-  , MdProgressSpinnerModule, MdToolbarModule } from '@angular/material';
+import {MdCardModule, MdRadioModule, MdSliderModule, MdProgressBarModule,
+        MdProgressSpinnerModule, MdToolbarModule, MdGridListModule} from '@angular/material';
 import {MdMenuModule} from '@angular/material';
 
 
@@ -37,7 +37,7 @@ const appRoutes: Routes = [
     BrowserAnimationsModule, MdToolbarModule,
     MdButtonModule, MdCheckboxModule,
     MdIconModule, MdListModule, MdCardModule, MdRadioModule, MdSliderModule,
-    MdProgressBarModule, MdProgressSpinnerModule,
+    MdProgressBarModule, MdProgressSpinnerModule, MdGridListModule,
     MdMenuModule,
     RouterModule.forRoot(appRoutes)
   ],
