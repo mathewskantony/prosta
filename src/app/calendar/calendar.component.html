@@ -1,18 +1,28 @@
-<md-grid-list cols="7">
-  <md-grid-tile
-    *ngFor="let dow of dayOfWeek"
-    colspan="1"
-    rowspan="1"
-    [style.background]="calendar.class.header">
-    {{dow}}
-  </md-grid-tile>
-  <md-grid-tile
-    *ngFor="let day of calendar.days"
-    colspan="1"
-    rowspan="1"
-    [style.background]="day.isSelected ? calendar.class.selected :calendar.class.cell"
-    (click)="selectDate(day)"
-    (dblclick)="deSelect(day)">
-    {{day.dayOfMonth}}
-  </md-grid-tile>
-</md-grid-list>
+<md-card>
+  <md-card-header layout-align="center center" color="primary">
+    <md-card-title>
+      <span (click)="previousMonth()"><md-icon>arrow_back</md-icon></span>
+      <span style="vertical-align: top"><b>{{calendar.calendarMonthYear}}</b></span>
+      <span (click)="nextMonth()"><md-icon>arrow_forward</md-icon></span>
+    </md-card-title>
+  </md-card-header>
+  <md-card-content>
+    <md-grid-list cols="7">
+      <md-grid-tile
+        *ngFor="let dow of dayOfWeek"
+        colspan="1"
+        rowspan="1"
+        [style.background]="calendar.class.header">
+        {{dow}}
+      </md-grid-tile>
+      <md-grid-tile
+        *ngFor="let day of calendar.days"
+        colspan="1"
+        rowspan="1"
+        [style.background]="day.isDisabled ? calendar.class.disabled : day.isSelected ? calendar.class.selected :calendar.class.cell"
+        (click)="day.isDisabled ? return : selectDate(day)">
+        {{day.dayOfMonth}}
+      </md-grid-tile>
+    </md-grid-list>
+  </md-card-content>
+</md-card>
