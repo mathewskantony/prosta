@@ -6,7 +6,7 @@ import { DatePipe} from '@angular/common';
   styleUrls: ['./calendar.component.css']
 })
 export class CalendarComponent implements OnInit {
-  availability = [];
+  availability = {};
   dayOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   monthName = ['January', 'February', 'March', 'April', 'May', 'June', 'July',
     'August', 'September', 'October', 'November', 'December'];
@@ -25,12 +25,12 @@ export class CalendarComponent implements OnInit {
       const datePipe = new DatePipe('en-US');
       day.date = datePipe.transform(tmp, 'dd/MM/yyyy');
       day.isSelected = true;
-      // this.availability[this.calendar.calendarMonthYear].push(day.dayOfMonth);
+      this.availability[this.calendar.calendarMonthYear].push(day.dayOfMonth);
     } else {
       console.log('Deselect')
       day.date = '';
       day.isSelected = false;
-      // this.availability[this.calendar.calendarMonthYear][this.availability[this.calendar.calendarMonthYear].indexOf(day.dayOfMonth)] = '';
+      this.availability[this.calendar.calendarMonthYear][this.availability[this.calendar.calendarMonthYear].indexOf(day.dayOfMonth)] = '';
     }
   }
   previousMonth() {
@@ -71,8 +71,9 @@ export class CalendarComponent implements OnInit {
     this.calendar.calendarMonthYear = this.monthName[month] + ' ' + year;
     const today = new Date();
     this.calendar.today = { day : today.getDate(), month: today.getMonth(), year: today.getFullYear()};
-    const calendarMonthYear = this.calendar.calendarMonthYear;
-    // this.availability.push({calendarMonthYear: []});
+    if (!this.availability[this.calendar.calendarMonthYear]) {
+      this.availability[this.calendar.calendarMonthYear] = [];
+    }
     console.log(this.availability)
     this.pushDaysOfMonth(day_no);
 
@@ -89,7 +90,7 @@ export class CalendarComponent implements OnInit {
     let count = 1;
     for ( ; c <= 6; c++) {
       this.calendar.days.push({date: '', dayOfMonth: count,
-        isSelected: false,
+        isSelected: this.availability[this.calendar.calendarMonthYear].indexOf(count) !== -1 ,
         isDisabled : this.calendar.calendarYear < this.calendar.today.year ? true :
             this.calendar.calendarMonth < this.calendar.today.month ? true :
               this.calendar.calendarMonth === this.calendar.today.month && count < this.calendar.today.day ? true : false });
@@ -100,7 +101,7 @@ export class CalendarComponent implements OnInit {
       for (let c1 = 0; c1 <= 6; c1++) {
         if (count <= this.calendar.numberOfDaysInMonth) {
           this.calendar.days.push({date: '', dayOfMonth: count,
-            isSelected: false,
+            isSelected: this.availability[this.calendar.calendarMonthYear].indexOf(count) !== -1,
             isDisabled : this.calendar.calendarYear < this.calendar.today.year ? true :
               this.calendar.calendarMonth < this.calendar.today.month ? true :
                 this.calendar.calendarMonth === this.calendar.today.month && count < this.calendar.today.day ? true : false});

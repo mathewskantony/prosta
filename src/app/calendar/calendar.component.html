@@ -19,7 +19,7 @@
         *ngFor="let day of calendar.days"
         colspan="1"
         rowspan="1"
-        [style.background]="day.isDisabled ? calendar.class.disabled : day.isSelected ? calendar.class.selected :calendar.class.cell"
+        [style.background]="day.isSelected ? calendar.class.selected : day.isDisabled ? calendar.class.disabled : calendar.class.cell"
         (click)="day.isDisabled ? return : selectDate(day)">
         {{day.dayOfMonth}}
       </md-grid-tile>
