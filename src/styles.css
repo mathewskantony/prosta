@@ -1,1 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+.mat-card-header-text{
+  width: 100%;
+  text-align: center;
+  vertical-align: top;
+}

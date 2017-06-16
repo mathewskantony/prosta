@@ -7,7 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { MdIconModule, MdListModule, MdButtonModule, MdCheckboxModule} from '@angular/material';
-import {MdCardModule, MdRadioModule, MdSliderModule, MdProgressBarModule,
+import {MdCardModule, MdOptionModule, MdSelectModule, MdProgressBarModule,
         MdProgressSpinnerModule, MdToolbarModule, MdGridListModule} from '@angular/material';
 import {MdMenuModule} from '@angular/material';
 import 'rxjs/add/observable/of';
@@ -18,6 +18,7 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
 import { JobService } from './services/job-service.service';
 import { JobComponent } from './job/job.component';
 import { CalendarComponent } from './calendar/calendar.component';
+import { SelectedDatesPipe } from './calendar/selected-dates.pipe';
 
 const appRoutes: Routes = [
   { path: 'calendar', component: CalendarComponent,  data: {title: 'My Availability'}},
@@ -31,7 +32,8 @@ const appRoutes: Routes = [
     MenuComponent,
     ToolbarComponent,
     JobComponent,
-    CalendarComponent
+    CalendarComponent,
+    SelectedDatesPipe
   ],
   imports: [
     BrowserModule,
@@ -39,7 +41,7 @@ const appRoutes: Routes = [
     HttpModule,
     BrowserAnimationsModule, MdToolbarModule,
     MdButtonModule, MdCheckboxModule,
-    MdIconModule, MdListModule, MdCardModule, MdRadioModule, MdSliderModule,
+    MdIconModule, MdListModule, MdCardModule, MdOptionModule, MdSelectModule,
     MdProgressBarModule, MdProgressSpinnerModule, MdGridListModule,
     MdMenuModule,
     RouterModule.forRoot(appRoutes)

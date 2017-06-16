@@ -12,8 +12,10 @@ export class CalendarComponent implements OnInit {
     'August', 'September', 'October', 'November', 'December'];
   calendar = { calendarMonthYear : '', calendarMonth: 0, calendarYear: 0 , numberOfDaysInMonth : 0, today : {day: 0, month: 0, year: 0},
                 days : [], class: {header: 'white', cell: 'white', selected: 'green', disabled: 'lightgray'}};
+  shifts = [{type : 'Day', value: true}, {type: 'Night', value: false}];
+  timings = [{type : 'Full', value: true}, {type: 'Half', value: false}];
+  sessions = [{type : 'AM', value: true}, {type: 'PM', value: false}];
   constructor() { }
-
   ngOnInit() {
     this.intCalendar(new Date());
   }
@@ -84,30 +86,45 @@ export class CalendarComponent implements OnInit {
       if (c === day_no) {
         break;
       }
-      this.calendar.days.push({date: '', dayOfMonth: '', isSelected: false, isDisabled : false});
+      this.calendar.days.push(new Day());
     }
-
+    const datePipe = new DatePipe('en-US');
     let count = 1;
     for ( ; c <= 6; c++) {
-      this.calendar.days.push({date: '', dayOfMonth: count,
+      const tmp = new Date(this.monthName[this.calendar.calendarMonth] + ' ' + count + ' ' + this.calendar.calendarYear);
+      const dayString = datePipe.transform(tmp, 'dd/MM/yyyy');
+      this.calendar.days.push({date: dayString, dayOfMonth: count,
         isSelected: this.availability[this.calendar.calendarMonthYear].indexOf(count) !== -1 ,
         isDisabled : this.calendar.calendarYear < this.calendar.today.year ? true :
             this.calendar.calendarMonth < this.calendar.today.month ? true :
-              this.calendar.calendarMonth === this.calendar.today.month && count < this.calendar.today.day ? true : false });
+              this.calendar.calendarMonth === this.calendar.today.month && count < this.calendar.today.day ? true : false,
+        isFullDay : true, isDayShift: true, isAM: true});
       count++;
     }
     console.log(count + this.calendar.calendarMonth + this.calendar.calendarYear);
     for (let r = 3; r <= 7; r++) {
       for (let c1 = 0; c1 <= 6; c1++) {
         if (count <= this.calendar.numberOfDaysInMonth) {
-          this.calendar.days.push({date: '', dayOfMonth: count,
+          const tmp = new Date(this.monthName[this.calendar.calendarMonth] + ' ' + count + ' ' + this.calendar.calendarYear);
+          const dayString = datePipe.transform(tmp, 'dd/MM/yyyy');
+          this.calendar.days.push({date: dayString, dayOfMonth: count,
             isSelected: this.availability[this.calendar.calendarMonthYear].indexOf(count) !== -1,
             isDisabled : this.calendar.calendarYear < this.calendar.today.year ? true :
               this.calendar.calendarMonth < this.calendar.today.month ? true :
-                this.calendar.calendarMonth === this.calendar.today.month && count < this.calendar.today.day ? true : false});
+                this.calendar.calendarMonth === this.calendar.today.month && count < this.calendar.today.day ? true : false,
+            isFullDay : true, isDayShift: true, isAM: true});
         }
         count++;
       }
     }
   }
+}
+export class Day {
+date: string;
+dayOfMonth: number;
+isSelected: boolean;
+isDisabled: boolean;
+isFullDay: boolean;
+isDayShift: boolean;
+isAM: boolean;
 }
