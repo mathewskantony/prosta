@@ -21,7 +21,17 @@
         rowspan="1"
         [style.background]="day.isSelected ? calendar.class.selected : day.isDisabled ? calendar.class.disabled : calendar.class.cell"
         (click)="day.isDisabled ? return : selectDate(day)">
-        {{day.dayOfMonth}}
+        <div style="width: 100%; height: 100%; position: relative;" *ngIf="day.dayOfMonth">
+          <div style="z-index: 100;width: 100%; height: 100%; text-align: center; position: absolute; display: table;">
+            <div style="display: table-cell; vertical-align: middle">{{day.dayOfMonth}}</div>
+          </div>
+          <div style="height: 50%" [class]="day.isFullDay ? '' : !day.isAM ? 'cell-bg-white' : 'cell-bg-green'">
+
+          </div>
+          <div style="height: 50%" [class]="day.isFullDay ? '' : day.isAM ? 'cell-bg-white': 'cell-bg-green'"></div>
+
+        </div>
+
       </md-grid-tile>
     </md-grid-list>
   </md-card-content>

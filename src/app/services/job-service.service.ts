@@ -11,7 +11,7 @@ export class JobService {
   constructor(private http: Http) { }
 
   getJobs(): Observable<Job[]> {
-    return this.http.get('../assets/jobs.json')
+    return this.http.get('./assets/jobs.json')
       .map(this.extractData);
   }
   private extractData(res: Response) {

@@ -21,18 +21,20 @@ export class CalendarComponent implements OnInit {
   }
 
   selectDate(day) {
-    if (!day.isSelected) {
-      console.log('Select')
-      const tmp = new Date(this.monthName[this.calendar.calendarMonth] + ' ' + day.dayOfMonth + ' ' + this.calendar.calendarYear);
-      const datePipe = new DatePipe('en-US');
-      day.date = datePipe.transform(tmp, 'dd/MM/yyyy');
-      day.isSelected = true;
-      this.availability[this.calendar.calendarMonthYear].push(day.dayOfMonth);
-    } else {
-      console.log('Deselect')
-      day.date = '';
-      day.isSelected = false;
-      this.availability[this.calendar.calendarMonthYear][this.availability[this.calendar.calendarMonthYear].indexOf(day.dayOfMonth)] = '';
+    if (day.dayOfMonth !== 0) {
+      if (!day.isSelected) {
+        console.log('Select')
+        const tmp = new Date(this.monthName[this.calendar.calendarMonth] + ' ' + day.dayOfMonth + ' ' + this.calendar.calendarYear);
+        const datePipe = new DatePipe('en-US');
+        day.date = datePipe.transform(tmp, 'dd/MM/yyyy');
+        day.isSelected = true;
+        this.availability[this.calendar.calendarMonthYear].push(day.dayOfMonth);
+      } else {
+        console.log('Deselect')
+        day.date = '';
+        day.isSelected = false;
+        this.availability[this.calendar.calendarMonthYear][this.availability[this.calendar.calendarMonthYear].indexOf(day.dayOfMonth)] = '';
+      }
     }
   }
   previousMonth() {
@@ -86,7 +88,10 @@ export class CalendarComponent implements OnInit {
       if (c === day_no) {
         break;
       }
-      this.calendar.days.push(new Day());
+      this.calendar.days.push({date: '', dayOfMonth: 0,
+        isSelected: false ,
+        isDisabled : false,
+        isFullDay : true, isDayShift: true, isAM: true});
     }
     const datePipe = new DatePipe('en-US');
     let count = 1;
