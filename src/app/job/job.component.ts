@@ -19,5 +19,18 @@ export class JobComponent implements OnInit {
   getJobs() {
     this.jobService.getJobs().subscribe(jobs => this.jobs = jobs);
   }
-
+  accept(job: Job) {
+    job.status = 'A';
+  }
+  decline(job: Job) {
+    job.status = 'D';
+  }
+  hasAnyJobAccepted(): boolean {
+    for (let i = 0; i < this.jobs.length ; i++) {
+      if (this.jobs[i].status === 'A') {
+        return true;
+      }
+    }
+    return false;
+  }
 }

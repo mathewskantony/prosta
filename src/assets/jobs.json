@@ -1,16 +1,16 @@
-[{"employer":"Rayvale Nursing Home", "location":"Leixlip","status":"","date":"10/06/2017","startTime":"08.00","endTime":"20.00","hours":"10","hRate":"14","description":"Needed Nurses",
+[{"employer":"Rayvale Nursing Home", "status":"", "location":"Leixlip","status":"","date":"10/06/2017","startTime":"08.00","endTime":"20.00","hours":"10","hRate":"14","description":"Needed Nurses",
     "info": {
     "distance": "1 KM from your current location."
 }},
-  {"employer":"St.James Hospital", "location":"Dublin","status":"","date":"11/06/2017","startTime":"10.00","endTime":"22.00","hours":"10","hRate":"18","description":"Manager needed",
+  {"employer":"St.James Hospital", "status":"", "location":"Dublin","status":"","date":"11/06/2017","startTime":"10.00","endTime":"22.00","hours":"10","hRate":"18","description":"Manager needed",
     "info": {
       "distance": "Less than 1 KM from your current location."
     }},
-  {"employer":"St.Adams Hospital", "location":"Tallaght","status":"","date":"10/06/2017","startTime":"10.00","endTime":"22.00","hours":"10","hRate":"10","description":"Care assistant needed",
+  {"employer":"St.Adams Hospital", "status":"", "location":"Tallaght","status":"","date":"10/06/2017","startTime":"10.00","endTime":"22.00","hours":"10","hRate":"10","description":"Care assistant needed",
     "info": {
       "distance": "5 KM from your current location."
     }},
-  {"employer":"St.Adams Hospital", "location":"Tallaght","status":"","date":"13/06/2017","startTime":"10.00","endTime":"22.00","hours":"10","hRate":"12","description":"Nurse needed",
+  {"employer":"St.Adams Hospital", "status":"", "location":"Tallaght","status":"","date":"13/06/2017","startTime":"10.00","endTime":"22.00","hours":"10","hRate":"12","description":"Nurse needed",
     "info": {
       "distance": "7 KM from your current location."
     }}]

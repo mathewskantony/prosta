@@ -27,7 +27,7 @@ import {LoginService} from './services/login/login.service';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/jobs', pathMatch: 'full'},
-  { path: 'calendar', component: CalendarComponent,  data: {title: 'My Availability'}},
+  { path: 'calendar', component: CalendarComponent,  data: {title: 'My Availability'}, canActivate: [AuthGuard]},
   { path: 'jobs', component: JobComponent,  data: {title: 'Jobs'}, canActivate: [AuthGuard]},
   { path: 'login', component: LoginComponent, data: {title: 'Login'}},
   { path: '**', redirectTo: '', canActivate: [AuthGuard]}
