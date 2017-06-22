@@ -6,9 +6,11 @@ import { Observable } from 'rxjs/Observable';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { MdIconModule, MdListModule, MdButtonModule, MdCheckboxModule} from '@angular/material';
+import {MdSnackBarModule} from '@angular/material';
+import {
+  MdIconModule, MdListModule, MdButtonModule, MdCheckboxModule} from '@angular/material';
 import {MdCardModule, MdOptionModule, MdSelectModule, MdProgressBarModule,
-        MdProgressSpinnerModule, MdToolbarModule, MdGridListModule} from '@angular/material';
+        MdProgressSpinnerModule, MdToolbarModule, MdGridListModule, MdInputModule} from '@angular/material';
 import {MdMenuModule} from '@angular/material';
 import 'rxjs/add/observable/of';
 
@@ -19,11 +21,16 @@ import { JobService } from './services/job-service.service';
 import { JobComponent } from './job/job.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { SelectedDatesPipe } from './calendar/selected-dates.pipe';
+import { LoginComponent } from './login/login.component';
+import { AuthGuard } from './guards/auth.guard';
+import {LoginService} from './services/login/login.service';
 
 const appRoutes: Routes = [
+  { path: '', redirectTo: '/jobs', pathMatch: 'full'},
   { path: 'calendar', component: CalendarComponent,  data: {title: 'My Availability'}},
-  { path: 'jobs', component: JobComponent,  data: {title: 'Jobs'} },
-  { path: '', redirectTo: '/jobs', pathMatch: 'full'}
+  { path: 'jobs', component: JobComponent,  data: {title: 'Jobs'}, canActivate: [AuthGuard]},
+  { path: 'login', component: LoginComponent, data: {title: 'Login'}},
+  { path: '**', redirectTo: '', canActivate: [AuthGuard]}
 ];
 
 @NgModule({
@@ -33,7 +40,8 @@ const appRoutes: Routes = [
     ToolbarComponent,
     JobComponent,
     CalendarComponent,
-    SelectedDatesPipe
+    SelectedDatesPipe,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -43,15 +51,15 @@ const appRoutes: Routes = [
     MdButtonModule, MdCheckboxModule,
     MdIconModule, MdListModule, MdCardModule, MdOptionModule, MdSelectModule,
     MdProgressBarModule, MdProgressSpinnerModule, MdGridListModule,
-    MdMenuModule,
+    MdMenuModule, MdInputModule, MdSnackBarModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [JobService],
+  providers: [JobService, AuthGuard, LoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
   title;
   constructor(private router: Router) {
-    this.title = 'TESt';
+    this.title = 'Test';
   }
 }

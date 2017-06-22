@@ -15,7 +15,6 @@ export class JobService {
       .map(this.extractData);
   }
   private extractData(res: Response) {
-      console.log(res.json())
       return res.json() || { };
   }
 }
