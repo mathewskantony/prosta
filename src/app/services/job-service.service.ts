@@ -11,10 +11,15 @@ export class JobService {
   constructor(private http: Http) { }
 
   getJobs(): Observable<Job[]> {
+   /* this.http.get('https://maps.googleapis.com/maps/api/distancematrix/json?origins=53.3480029,-6.4622256&destinations=' + 'Tallaght')
+      .map((res1: Response) => {
+        console.log(res1.json());
+      });*/
     return this.http.get('./assets/jobs.json')
       .map(this.extractData);
   }
-  private extractData(res: Response) {
-      return res.json() || { };
+  extractData(res: Response) {
+      const jobs: Job[] = res.json();
+      return jobs;
   }
 }

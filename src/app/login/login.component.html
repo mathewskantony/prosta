@@ -1,13 +1,13 @@
 <md-card>
   <md-card-header>
-    <md-card-title>
-      Sign in
+    <md-card-title >
+      <b>Sign in</b>
     </md-card-title>
   </md-card-header>
   <md-card-content>
     <form>
       <md-input-container style="width: 100%;">
-        <input mdInput placeholder="User name" name="username" [(ngModel)]="model.username" required/>
+        <input mdInput placeholder="User name" name="username" [(ngModel)]="model.username" required autocomplete="off"/>
       </md-input-container>
       <br/>
       <md-input-container style="width: 100%;">
@@ -18,4 +18,3 @@
     </form>
   </md-card-content>
 </md-card>
-
