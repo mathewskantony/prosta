@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LoginService } from '../services/login/login.service';
 import {MdSnackBar, MdSnackBarConfig} from '@angular/material';
+import {Http} from '@angular/http';
+import {Observable} from 'rxjs/Observable';
 
 
 @Component({
@@ -14,9 +16,11 @@ export class LoginComponent implements OnInit {
   loading = false;
   returnUrl: string;
   loginFailed = false;
+  location: any;
   constructor(
     private route: ActivatedRoute,
     private router: Router, private loginService: LoginService,
+    private http: Http,
     public snackBar: MdSnackBar) { }
 
   ngOnInit() {

@@ -9,7 +9,7 @@
         <p md-line> Time: {{job.startTime}} - {{job.endTime}} </p>
         <p md-line> Hours: {{job.hours}} </p>
         <p md-line> Hourly Rate: {{job.hRate}} </p>
-        <p md-line> Distance: {{job.locationInfo.rows[0].elements[0].distance.text}} </p>
+        <p md-line> Travel Info: {{job.info.distance.text}}, {{job.info.duration.text}} </p>
       </md-card-content>
       <md-card-actions>
         <button *ngIf="job.status === ''" md-raised-button [disabled] = "hasAnyJobAccepted()" color="primary" (click)="accept(job)">ACCEPT</button>

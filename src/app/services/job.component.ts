@@ -8,5 +8,5 @@ hRate: number;
 description: string;
 date: string;
 status: string;
-locationInfo: any;
+info: any;
 }

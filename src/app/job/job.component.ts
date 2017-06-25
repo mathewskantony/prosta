@@ -17,7 +17,10 @@ export class JobComponent implements OnInit {
   }
 
   getJobs() {
-    this.jobService.getJobs().subscribe(jobs => this.jobs = jobs);
+    this.jobService.getJobs().subscribe(jobs => {
+      this.jobs = jobs;
+      this.jobService.findLocation(this.jobs);
+    });
   }
   accept(job: Job) {
     job.status = 'A';
