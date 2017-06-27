@@ -7,13 +7,20 @@ import 'rxjs/add/operator/map';
 export class LoginService {
   isLoggedIn: boolean;
   constructor(private http: Http) { }
-  logn (userName, password): Observable<boolean>  {
-      if (userName === 'test' && password === 'test') {
+  logn (userName, password): Observable<Response>  {
+    const formData = new FormData();
+    formData.append('username', userName);
+    formData.append('password', password);
+    return this.http.post('http://10.15.216.147:8080/auth/login', formData);
+      /* if (userName === 'test' && password === 'test') {
         this.isLoggedIn = true;
         return Observable.of(true);
       } else {
         this.isLoggedIn = false;
         return Observable.of(false);
-      }
+      }*/
+  }
+  whoami(): Observable<Response> {
+    return this.http.get('http://10.15.216.147:8080/whoami');
   }
 }

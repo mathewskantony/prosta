@@ -24,6 +24,7 @@ import { SelectedDatesPipe } from './calendar/selected-dates.pipe';
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './guards/auth.guard';
 import {LoginService} from './services/login/login.service';
+import {AppRequestOptions} from './http/app-request-options';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/jobs', pathMatch: 'full'},
@@ -54,8 +55,9 @@ const appRoutes: Routes = [
     MdMenuModule, MdInputModule, MdSnackBarModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [JobService, AuthGuard, LoginService],
-  bootstrap: [AppComponent]
+  providers: [JobService, AuthGuard, LoginService,
+              {provide : 'webApiBaseUrl', useValue: 'http://localhost:8080' }, AppRequestOptions],
+  bootstrap: [AppComponent ]
 })
 export class AppModule {
   title;

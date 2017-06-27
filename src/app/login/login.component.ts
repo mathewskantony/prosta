@@ -31,15 +31,18 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.loginService.logn(this.model.username, this.model.password).subscribe(isSuccess => {
-      if (isSuccess) {
-        this.router.navigate(['/jobs']);
-      } else {
-        const config = new MdSnackBarConfig();
-        config.politeness = 'assertive';
-        config.duration = 5000;
-        const snackBarRef = this.snackBar.open('Login Failed.', '', config);
-      }
+    this.loginService.logn(this.model.username, this.model.password).catch(res => {
+      const config = new MdSnackBarConfig();
+      config.politeness = 'assertive';
+      config.duration = 5000;
+      const snackBarRef = this.snackBar.open('Login Failed.', '', config);
+      return Observable.throw(res.json());
+    }).subscribe(res => {
+      this.loginService.isLoggedIn = true;
+      this.router.navigate(['/jobs']);
+      this.loginService.whoami().subscribe(res1 => {
+        console.log(res1.json());
+      });
     });
   }
 }
