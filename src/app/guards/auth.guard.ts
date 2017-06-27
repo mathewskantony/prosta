@@ -13,7 +13,7 @@ export class AuthGuard implements CanActivate {
     if (this.loginService.isLoggedIn) {
       return true;
     } else {
-      this.http.get('http://10.15.216.147:8080/auth/refresh').catch( res => {
+      this.http.get('http://localhost:8080/auth/refresh').catch( res => {
         this.loginService.isLoggedIn = false;
         this.router.navigate(['/login']);
         return Observable.throw(res.json());

@@ -13,9 +13,9 @@ export class CalendarComponent implements OnInit {
     'August', 'September', 'October', 'November', 'December'];
   calendar = { calendarMonthYear : '', calendarMonth: 0, calendarYear: 0 , numberOfDaysInMonth : 0, today : new Date(),
                 days : [], class: {header: 'white', cell: 'white', selected: 'green', disabled: 'lightgray'}};
-  shifts = [{type : 'Day', value: 'Y'}, {type: 'Night', value: 'N'}];
-  timings = [{type : 'Full', value: 'Y'}, {type: 'Half', value: 'N'}];
-  sessions = [{type : 'AM', value: 'Y'}, {type: 'PM', value: 'N'}];
+  shifts = [{type : 'Day', value: 'D'}, {type: 'Night', value: 'N'}];
+  timings = [{type : 'Full', value: 'F'}, {type: 'Half', value: 'H'}];
+  sessions = [{type : 'AM', value: 'AM'}, {type: 'PM', value: 'PM'}];
   constructor() { }
   ngOnInit() {
     this.intCalendar(new Date());
@@ -26,8 +26,8 @@ export class CalendarComponent implements OnInit {
       if (!day.isSelected) {
         console.log('Select')
         day.isSelected = true;
-        day.isDayShift = 'Y';
-        day.isFullDay = 'Y';
+        day.shiftType = 'D';
+        day.shiftLength = 'F';
         this.availability[this.calendar.calendarMonthYear][day.date] = day;
       }
     }
@@ -36,20 +36,20 @@ export class CalendarComponent implements OnInit {
     console.log('Delete day')
     day.isSelected = false;
     this.availability[this.calendar.calendarMonthYear][day.date] = null;
-    day.isFullDay = 'Y';
-    day.isDayShift = '';
-    day.isAM = '';
+    day.shiftLength = 'F';
+    day.shiftType = '';
+    day.shiftSession = '';
   }
   onShiftChange(day) {
     console.log('shift changes')
-    day.isFullDay = 'Y';
-    day.isAM = '';
+    day.shiftLength = 'F';
+    day.shiftSession = '';
   }
   onTimingsChange(day) {
-    if (day.isFullDay === 'Y') {
-      day.isAM = '';
+    if (day.shiftLength === 'F') {
+      day.shiftSession = '';
     } else {
-      day.isAM = 'Y';
+      day.shiftSession = 'AM';
     }
   }
   previousMonth() {
@@ -104,7 +104,7 @@ export class CalendarComponent implements OnInit {
       this.calendar.days.push({date: '', dayOfMonth: 0,
         isSelected: false ,
         isDisabled : false,
-        isFullDay : 'Y', isDayShift: '', isAM: ''});
+        shiftLength : 'F', shiftType: '', shiftSession: ''});
     }
     const datePipe = new DatePipe('en-US');
     const todayInMilli = this.calendar.today.getTime();
@@ -133,7 +133,7 @@ export class CalendarComponent implements OnInit {
         date: dayString, dayOfMonth: count,
         isSelected: false,
         isDisabled: false,
-        isFullDay: 'Y', isDayShift: '', isAM: ''
+        shiftType: 'D', shiftLength: '', shiftSession: ''
       };
     }
     day.isDisabled = todayInMilli > tmp.getTime();
@@ -145,7 +145,7 @@ date: string;
 dayOfMonth: number;
 isSelected: boolean;
 isDisabled: boolean;
-isFullDay: string;
-isDayShift: string;
-isAM: string;
+shiftType: string;
+shiftLength: string;
+shiftSession: string;
 }

@@ -40,9 +40,6 @@ export class LoginComponent implements OnInit {
     }).subscribe(res => {
       this.loginService.isLoggedIn = true;
       this.router.navigate(['/jobs']);
-      this.loginService.whoami().subscribe(res1 => {
-        console.log(res1.json());
-      });
     });
   }
 }
